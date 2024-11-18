@@ -1,40 +1,207 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Points Distribution System
 
-## Getting Started
+A full-stack web application for managing and distributing points to addresses, built with React, TypeScript, and the Points Distribution SDK.
 
-First, run the development server:
 
+## 🌟 Features
+
+- **API Key Management**: Secure generation and storage of API keys
+- **Points Distribution**: Distribute points to blockchain addresses
+- **Points Lookup**: Multiple ways to query points data
+- **Real-time Feedback**: Instant notifications for all operations
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React with TypeScript
+- **Styling**: Tailwind CSS
+- **State Management**: React Hooks
+- **Notifications**: react-hot-toast
+- **SDK**: points-distribution-sdk
+
+## 📦 Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/points-distribution-system.git
+cd points-distribution-system
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+3. Install the Points Distribution SDK:
+```bash
+npm install points-distribution-sdk
+```
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 🚀 Usage
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+1. Start the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Open your browser and navigate to `http://localhost:3000`
 
-## Learn More
+## 🔄 System Flow
 
-To learn more about Next.js, take a look at the following resources:
+### 1. API Key Generation
+```mermaid
+graph LR
+    A[Enter Project Details] --> B[Generate API Key]
+    B --> C[Store API Key]
+    C --> D[Enable Points Operations]
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+### 2. Points Distribution
+```mermaid
+graph LR
+    A[Enter Event Details] --> B[Enter Address]
+    B --> C[Specify Points]
+    C --> D[Distribute Points]
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Points Lookup
+```mermaid
+graph LR
+    A[Enter Address] --> B[Choose Lookup Type]
+    B --> C1[Get All Points]
+    B --> C2[Get Points by Event]
+    B --> C3[Get Total Points]
+```
 
-## Deploy on Vercel
+## 💻 Component Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+points-distribution-system/
+├── components/
+│   ├── ApiKeyForm.tsx
+│   ├── DistributePointsForm.tsx
+│   └── PointsLookup.tsx
+├── pages/
+│   └── index.tsx
+└── ...
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+## 🔍 Component Details
+
+### ApiKeyForm
+- Handles API key generation
+- Stores API key in localStorage
+- Provides copy-to-clipboard functionality
+
+### DistributePointsForm
+- Manages point distribution to addresses
+- Validates input data
+- Provides real-time feedback
+
+### PointsLookup
+- Multiple lookup options:
+  - All points for an address
+  - Points for specific event
+  - Total points calculation
+- Displays results in formatted JSON
+
+## 🔐 SDK Integration
+
+The system uses the Points Distribution SDK for all operations:
+
+```typescript
+import { PointsSDK } from 'points-distribution-sdk';
+
+// Generate API Key
+const registration = await PointsSDK.register('ProjectName', 'email@example.com');
+
+// Initialize SDK
+const sdk = new PointsSDK(apiKey);
+
+// Distribute Points
+await sdk.distribute('eventName', [
+  { address: '0x123...', points: 100 }
+]);
+
+// Lookup Points
+const points = await sdk.getPointsByAddress('0x123...');
+```
+
+## 🌐 API Endpoints
+
+The SDK internally communicates with the following endpoints:
+
+|
+ Endpoint 
+|
+ Method 
+|
+ Description 
+|
+|
+----------
+|
+---------
+|
+-------------
+|
+|
+`/register`
+|
+ POST 
+|
+ Generate new API key 
+|
+|
+`/distribute`
+|
+ POST 
+|
+ Distribute points 
+|
+|
+`/points/address/:address`
+|
+ GET 
+|
+ Get points by address 
+|
+|
+`/points/address/:address/event/:eventName`
+|
+ GET 
+|
+ Get points by address and event 
+|
+|
+`/points/address/:address/total`
+|
+ GET 
+|
+ Get total points 
+|
+
+## 📱 Screenshots
+
+### API Key Generation
+
+### Points Distribution
+
+### Points Lookup
+
+## 🔨 Development
+
+1. Fork the repository
+2. Create your feature branch:
+```bash
+git checkout -b feature/AmazingFeature
+```
+3. Commit your changes:
+```bash
+git commit -m 'Add some AmazingFeature'
+```
+4. Push to the branch:
+```bash
+git push origin feature/AmazingFeature
+```
+5. Open a Pull Request
